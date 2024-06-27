@@ -80,7 +80,7 @@ export async function POST(req:Request) {
             success : true,
             message : "User Registered Successfully. Please verify your account"    
         },
-        {status:500}
+        {status:200}
         );
         
     } catch (error) {

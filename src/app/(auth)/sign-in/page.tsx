@@ -48,7 +48,7 @@ export default function signUp() {
                 }
             }
             if (result?.url) {
-                router.replace('/dashboard');
+                router.replace('/Dashboard');
             }
 
         } catch (error) {

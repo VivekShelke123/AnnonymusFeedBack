@@ -62,6 +62,12 @@ export default function Dashboard() {
         setIsSwitchLoading(true);
         try {
             const response = await axios.get('api/get-messages');
+            if(!response.data.success){
+                toast({
+                    title:" No data found",
+                    description:response.data.message
+                })
+            }
             setMessage(response.data.messages || []);
             if (refresh) {
                 toast({

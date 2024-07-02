@@ -19,31 +19,35 @@ export async function GET(request:Request) {
         }, { status: 401 });
     }
 
-    const userId = new mongoose.Types.ObjectId(user._id);
 
+    const username = user.username;
     try {
-        const user =await UserModel.aggregate([
-            {$match : {id : userId}},
+        const data =await UserModel.aggregate([
+            {$match : {username : username}},
             {$unwind : "$messages"},
-            {$sort : {'$messages.createdAt':-1}},
+            {$sort : {' messages.createdAt':-1}},
             {$group : {_id : '$_id',messages:{$push:'$messages'}}}, 
         ]);
-
-        if(!user || user.length === 0){
+        if(!data || data.length === 0){
             return Response.json({
                 success: false,
-                message: 'User Not Found',
-            }, { status: 404 });
+                message: 'No Message till Now',
+            }, { status: 200 });
         }
 
         return Response.json({
             success: true,
             message: 'User Found',
-            messages : user[0].messages,
+            messages : data[0].messages,
         }, { status: 200 });
 
     } catch (error) {
-        
+        console.error(error);
+        return Response.json({
+            success: false,
+            message: 'Some Error Occured',
+        }, { status: 500 });
+
     }
 
 

@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 import { signInSchema } from "@/schema/signInSchema";
 import { signIn } from "next-auth/react";
 
-export default function signUp() {
+export default function SignIn() {
     const { toast } = useToast();
     const router = useRouter();
 

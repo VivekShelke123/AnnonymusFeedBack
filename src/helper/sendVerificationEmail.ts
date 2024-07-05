@@ -7,6 +7,7 @@ export async function sendVerificationMessage(
     username : string,
     verifyCode : string 
 ) : Promise<ApiResponse> {
+    console.log("Entered in verifiaction email")
     try {
             await resend.emails.send({
             from: 'onboarding@resend.dev',
@@ -14,10 +15,12 @@ export async function sendVerificationMessage(
             subject: 'Hello Heres Your Verification Code',
             react: VerificationEmail({username , otp : verifyCode}),
           });
+          console.log("email send");
           return{
             success : true ,
             message : 'OTP Send Successfully'
           }
+          
     } catch (error) {
         console.error("Error occured while sending otp",error);
         return {

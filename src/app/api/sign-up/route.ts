@@ -74,7 +74,7 @@ export async function POST(req:Request) {
                 message : emailResponse.message
             },
             {status:500}
-            );
+        );
         }
         return Response.json({
             success : true,
